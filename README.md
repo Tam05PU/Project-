@@ -1,90 +1,152 @@
-# Project-
-Predictive Maintanance Using Machine Learning 
+# Machine Failure Prediction using Machine Learning - up2246639
 
-Introduction: 
+## Introduction
 
-Brief description of the project (ca. 10 lines in markdown format)
+This project aims to build a machine learning pipeline to predict whether a machine will fail or not fail.
+The dataset contains information about machine operating conditions, including air temperature, process temperature, rotational speed, torque, tool wear, and machine type. The target column used in this project is `Machine failure`.
 
-Business objectives:
+This is a classification problem because the model predicts one of two possible outcomes:
 
-State a purpose of the project and project goal. E.g. set the target for prediction probability
+- `0` = machine does not fail
+- `1` = machine fails
 
-ML Pipeline:
+## Business objectives
 
- ML Pipeline must tell the story. In our case, the story begins when you acquire out dataset
-and finishes when you test our model using data previously unseen by the model
+In a real business setting, this type of model could help a company plan maintenance earlier, and avoid unexpected repair costs.
 
-1. Data collection
+## ML Pipeline
 
- Describe here how you collect the data. Provide code snippets (if necessary)
+The machine learning pipeline follows these stages:
 
+1.  Data collection
 
+- The dataset was downloaded from Kaggle and saved as: `ai 2020.csv`
 
- Describe here how you check and validate the data (e.g. checking correct data format)
- Describe here how you split the dataset into training/validation/test subsets
+- After loading the dataset, several checks were carried out: 
+`df.head()`
+`df.info()`
+`df.isnull().sum()`
+`df.duplicated().sum()`
+`df.shape`
+.These were done to check the structure of the data set, data types and see of there are any missing values or any dupplicate rows
 
 2. EDA
 
- Document how you explore the dataset (what it is made of, label distribution, is it balanced?
-etc.)
+Exploratory Data Analysis was used to understand the dataset before building the machine learning models.
+
+- The target column, Machine failure, was checked using a countplot. This showed that the dataset is imbalanced because there are more machines that did not fail than machines that failed.
+
+- The Type column was also checked to see the distribution of machine types.
+
+- Histograms were created for the numerical features
+
+- Boxplots were created to compare each numerical feature against Machine failure.
+
+- A correlation heatmap was also created to check relationships between numerical features
 
 3. Model building
 
- Document how you choose and build your model. Explain and justify selection of this
-particular model type, starting hyperparameters and their optimisation, etc.
+Two machine learning models were built and compared:
+
+1. Logistic Regression:
+
+This models was selected since its has been designed for classification problems, especially when the target has two classes such as 0 and 1 
+
+2. Random forest Classifier:
+
+Random Forest Classifier was used because it is a strong classification model that combines multiple decision trees to improve prediction performance. 
+It can learn more complex patterns in the data compared with a single Decision Tree. 
 
 4. Model evaluation
 
- Document model evaluation. Use appropriate error metrics. Model building will, the most
-likely, be an iterative process. You might want to optimise hyperparameters and model
-architecture, change training process to improve model generalisation, reduce overfitting
-and loss. Describe model training curves here.
+The models were evaluated using:
+- Accuracy score
+- Classification report
+- Confusion matrix
+
+The initial two model were compared using the validation accuracy score, where the Randomforest model was more accurate. Then after the model optimisation the comparison was carried out again using the validation accuracy score, where the final model was selected as the oppimised Random forest classifier. 
 
 5. Prediction
 
- Document testing model in predicting previously unseen dataset and individual input.
-Include representative examples.
+## Jupyter notebook structure
 
-Jupyter notebook structure:
+1. Importing libraries
+2. Loading the dataset
+3. Data validation checks
+4. Exploratory data analysis
+5. Feature preparation
+6. Training two machine learning models
+7. Intial model comparison 
+7. Hyperparameter optimisation
+8. Final Model comparison
+9. Testing on unseen data
+10. Conclusion 
 
- Describe structure of Jupyter Notebook
+## Future work
 
-Future work:
+Future work for the project can include:
+ - Testing more modles
+ - Using a bigger data set 
+ - Using more advanced optimisation for all models 
 
- Describe your ideas - what could you improve in this project provided more time is given
-
-Libraries and modules:
+## Libraries and modules
 
 ### pandas
 
-`pandas` is used for loading the CSV file, storing the dataset as a dataframe, checking column types, summarising values, and creating prediction result tables. It is also used for selecting features and separating the target variable from the input variables.
-
-### numpy
-
-`numpy` is used for numerical operations and array handling. It supports the numerical processing behind the machine learning workflow and is useful when working with model outputs such as prediction probabilities.
+pandas was used to load and handle the dataset.
 
 ### matplotlib
 
-`matplotlib` is used to create visualisations such as bar charts, boxplots, confusion matrix plots, and ROC curves. These graphs help explain the dataset and model performance clearly.
+matplotlib was used to create visualisations. It was used to control figure sizes, add graph titles, and display plots.
 
 ### seaborn
 
-`seaborn` is used for more readable statistical visualisations, including count plots, correlation heatmaps, and boxplots. It improves the presentation of EDA outputs and helps identify relationships between variables.
+seaborn was used to create clearer statistical graphs. It was used for histograms, boxplots, and correlation heatmaps. 
 
 ### scikit-learn
+ 1. train_test_split 
 
-`scikit-learn` is the main machine learning library used in this project. It provides tools for train/test splitting, preprocessing, model pipelines, model training, hyperparameter tuning, predictions, and evaluation metrics.
+train_test_split was used to divide the dataset into training, validation, and unseen test sets.
+
+ 2. MinMaxScaler 
+
+MinMaxScaler was used to scale the numerical features. This helped place all numerical values on a similar scale before model training.
+
+ 3. OneHotEncoder
+
+OneHotEncoder was used to convert categorical text data into numbers so that a machine learning model can use it.
+
+ 4. LogisticRegression
+
+LogisticRegression was used as the first classification model.
+
+ 5. RandomForestClassifier
+
+ RandomForestClassifier was used as the second classification model
+
+ 6. classification_report 
+
+ classification_report was used to show precision, recall, and f1-score.
+
+ 7. confusion_matrix 
+
+confusion_matrix was used to show correct and incorrect predictions for each class
+
+## Unfixed bugs
+
+There are no known unfixed bugs in the current version of the notebook.
+
+## Acknowledgements and References
+
+- The dataset used in this project was obtained from Kaggle
+- Scikit-learn documentation was used for reserch to improve knowledge  
+- AI was used for explanations and provide structure 
+
+## Conclusion
+
+This project successfully created a machine learning pipeline for predicting machine failure.The project included data collection, validation, EDA, data preparation, model building, model evaluation, optimisation, and prediction. 
+
+Two models were trained and compared with eachother, The final model was selected based on validation performance, where Random Forest has achieved the best acuracy. 
+Hyperparameter tuning provided improvement in the calidation performance for the random forest. Hence, the improved Random Forest model is selected as the best-performing model.
 
 
- Give a list of used Python libraries and modules with brief description (ca. 5 lines of
-markdown text each) what they do, what they are for and how they were used
-
-Unfixed bugs:
-
-Acknowledgements and References:
-
- You must mention if (and where) you used ChatGPT or reused snippets of code from other
-people
- Include references if external resources were used to help with your work.
-
-Conclusions:
